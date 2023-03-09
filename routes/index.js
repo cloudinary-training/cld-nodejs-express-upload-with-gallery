@@ -49,6 +49,7 @@ const getOptimizedURL = (publicId) => {
   return cloudinary.url(publicId, {
     width: 300,
     height: 200,
+    dpr: "2.0",
     crop: "fill",
     gravity: "auto",
     quality: "auto",

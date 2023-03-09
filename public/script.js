@@ -14,6 +14,8 @@ const renderImages = async (urlList) => {
     var img = document.createElement("img");
     img.src = url;
     img.alt= "Cloudinary gallery image"
+    img.height = "200"
+    img.width="300"
     div.appendChild(img);
     document.getElementById("gallery").appendChild(div);
   });
@@ -26,6 +28,8 @@ const insertNewImage = async(newImageURL)=>{
   var img = document.createElement("img");
   img.src = newImageURL;
   img.alt = "Cloudinary recently uploaded image";
+  img.height = "200"
+  img.width="300"
   div.appendChild(img);
   document.querySelector("#gallery").prepend(div);
   document.getElementById("progress-bar").setAttribute("value",100)
