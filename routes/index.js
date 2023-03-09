@@ -17,9 +17,9 @@ const uploadImage = async (filename) => {
 
     // delete uploaded file in server space
     console.log("file to delete", uploadedFileName);
-    fs.unlink(uploadedFileName, (err) => {
-      if (err) {
-        console.log("delete error", err.getMessage());
+    fs.unlink(uploadedFileName, (error) => {
+      if (error) {
+        console.log("delete error", error);
         throw err;
       }
       console.log("Delete File successfully.");
@@ -37,7 +37,7 @@ const uploadImage = async (filename) => {
 const galleryImages = async (req, res) => {
   fetchOptimizedImageURLs()
     .then((urls) => {
-      console.log(JSON.stringify(urls, null, 2));
+      console.log("first url", urls[0]);
       res.json(urls);
     })
     .catch((error) => {
@@ -65,7 +65,7 @@ const fetchOptimizedImageURLs = async () => {
       })
     );
   }
-  console.log(JSON.stringify(optimizedImageURLs, null, 2));
+  // console.log(JSON.stringify(optimizedImageURLs, null, 2));
   return optimizedImageURLs;
 };
 
@@ -76,11 +76,21 @@ const upload = async (req, res) => {
   console.log("filename", filename);
   try {
     const uploadResponse = await uploadImage(filename);
-    console.log(uploadResponse);
+    // console.log(uploadResponse);
     // when upload is successful we fetch a new list of images based on LIST_TAG env variable
     // we map out an array of URLs and return that to the front end to render
-    const urls = await fetchOptimizedImageURLs();
-    res.json({ urls: urls });
+    // const urls = await fetchOptimizedImageURLs();
+    let newImageURL = cloudinary.url(uploadResponse.public_id, {
+      width: 300,
+      height: 200,
+      crop: "fill",
+      gravity: "auto",
+      quality: "auto",
+      fetch_format: "auto",
+      secure: true,
+    });
+    console.log("new image", newImageURL);
+    res.json({ url: newImageURL });
     // res.json(uploadResponse);
   } catch (error) {
     console.log("upload error", JSON.stringify(error));

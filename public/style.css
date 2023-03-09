@@ -1,12 +1,73 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap'); */
+body {
+  font-family: 'Inter';
+  font-weight: 300;
+  font-size: 22px;
+}
+.input-with-text {
+  font-family: 'Inter';
+  font-weight: 300;
+}
 #gallery {
   display: flex;
-  flex-direction:row;
+  flex-direction: row;
   flex-wrap: wrap;
-  row-gap: 1rem;
-  column-gap: 10px;
+  column-gap: 5px;
+  justify-content: center;
+}
+.container {
+  animation: fadeInAnimation ease 3s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+  }
 }
 
-#container {
-  width:"80vw";
-  margin: 0 auto;
+.container {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.form-container {
+  width: 80%;
+  margin: 10px auto;
+}
+
+ /* input[type=submit] {
+  font-family: 'Inter';
+  font-weight: 300;
+  margin-right: 20px;
+  border: none;
+  background: #3448c5;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+ }
+ input[type=submit]:disabled {
+  background-color: #eeeef1;
+  color: #0c163b;
+  opacity: 1;
+  cursor: not-allowed;
+} */
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: #3448c5;
+  padding: 10px 20px;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #0d45a5;
 }
