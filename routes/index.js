@@ -1,6 +1,7 @@
 const cloudinary = require("cloudinary").v2;
 const fs = require("fs");
 const path = require("path");
+const fetch = require("node-fetch");
 
 // cloudinary returns a promise
 // this function returns the Cloudinary Upload API response
@@ -56,7 +57,9 @@ const getOptimizedURL = (publicId) => {
   });
 };
 const fetchOptimizedImageURLs = async () => {
-  const listDeliveryURL = `https://res.cloudinary.com/${ cloudinary.config().cloud_name}/image/list/${process.env.LIST_TAG}.json`
+  const listDeliveryURL = `https://res.cloudinary.com/${
+    cloudinary.config().cloud_name
+  }/image/list/${process.env.LIST_TAG}.json`;
   // console.log(listDeliveryURL)
   const response = await fetch(listDeliveryURL);
   const data = await response.json();
@@ -77,9 +80,7 @@ const upload = async (req, res) => {
   try {
     const uploadResponse = await uploadImage(filename);
     // console.log(uploadResponse);
-    // when upload is successful we fetch a new list of images based on LIST_TAG env variable
-    // we map out an array of URLs and return that to the front end to render
-    // const urls = await fetchOptimizedImageURLs();
+    // when upload is successful we create a new URL that we can prepend to the front end gallery
     let newImageURL = getOptimizedURL(uploadResponse.public_id);
     console.log("new image", newImageURL);
     res.json({ url: newImageURL });
