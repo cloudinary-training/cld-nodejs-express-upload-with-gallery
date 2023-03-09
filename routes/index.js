@@ -11,7 +11,7 @@ const uploadImage = async (filename) => {
   // console.log(uploadedFileName);
   try {
     const uploadResponse = await cloudinary.uploader.upload(uploadedFileName, {
-      upload_preset: process.env.LIST_TAG,
+      upload_preset: process.env.SIGNED_PRESET,
     });
     // console.log(uploadResponse);
 
@@ -56,9 +56,9 @@ const getOptimizedURL = (publicId) => {
   });
 };
 const fetchOptimizedImageURLs = async () => {
-  const response = await fetch(
-    `https://res.cloudinary.com/picturecloud7/image/list/${process.env.LIST_TAG}.json`
-  );
+  const listDeliveryURL = `https://res.cloudinary.com/${ cloudinary.config().cloud_name}/image/list/${process.env.LIST_TAG}.json`
+  // console.log(listDeliveryURL)
+  const response = await fetch(listDeliveryURL);
   const data = await response.json();
 
   const optimizedImageURLs = [];
