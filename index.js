@@ -1,7 +1,6 @@
 require('dotenv').config();
 const cloudinary = require('cloudinary').v2;
 console.log('cloudinary config:', cloudinary.config().cloud_name);
-console.log(JSON.stringify(cloudinary.config(),null,2))
 
 const express = require('express')
 const multer = require('multer');
