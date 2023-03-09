@@ -63,6 +63,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
       // debugger
       insertNewImage(uploadedImage.url);
+      // disable upload
+        document.getElementById("file-submit").setAttribute("disabled",true);
+      // clear file input
+      document.getElementById("file-input").value='';
+      // set progress back to 0 after 1 second
+      setTimeout(() => {
+        document.getElementById("progress-bar").setAttribute("value",0)
+      }, "2000");
     });
 
   document.getElementById("file-input").addEventListener("change", (e) => {
