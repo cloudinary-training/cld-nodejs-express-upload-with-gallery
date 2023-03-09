@@ -54,15 +54,14 @@ h1 {
 }
 
 input[type=submit] {
-  font-family: 'Inter';
-  font-weight: 300;
+  font-family: 'Arial';
+  font-weight: bold;
   margin-right: 20px;
   border: none;
-  background: #ff5050;
+  background: #c8edf3;
   padding: 10px 20px;
   border-radius: 10px;
   color: #000;
-  font-weight: bold;
   cursor: pointer;
 
 }
@@ -70,6 +69,7 @@ input[type=submit] {
 
 input[type=submit]:disabled {
   background-color: #eeeef1;
+  font-weight:300;
   color: #0c163b;
   opacity: 1;
   cursor: not-allowed;
