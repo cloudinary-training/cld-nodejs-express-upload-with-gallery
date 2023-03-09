@@ -42,7 +42,7 @@ const galleryImages = async (req, res) => {
       res.json(urls);
     })
     .catch((error) => {
-      console.log("galleryImages error", JSON.stringify(error));
+      console.log("galleryImages error", error);
     });
 };
 const getOptimizedURL = (publicId) => {
