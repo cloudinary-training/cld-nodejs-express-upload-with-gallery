@@ -13,17 +13,23 @@ const renderImages = async (urlList) => {
     var div = document.createElement("div");
     var img = document.createElement("img");
     img.src = url;
+    img.alt= "Cloudinary gallery image"
     div.appendChild(img);
     document.getElementById("gallery").appendChild(div);
   });
 };
 
 const insertNewImage = async(newImageURL)=>{
+  document.getElementById("progress-bar").setAttribute("value",75)
+
   var div = document.createElement("div");
   var img = document.createElement("img");
   img.src = newImageURL;
+  img.alt = "Cloudinary recently uploaded image";
   div.appendChild(img);
   document.querySelector("#gallery").prepend(div);
+  document.getElementById("progress-bar").setAttribute("value",100)
+
 }
 
 const renderGalleryImages = async () => {
@@ -42,16 +48,20 @@ document.addEventListener("DOMContentLoaded", (e) => {
   document
     .getElementById("upload-form")
     .addEventListener("submit", async (e) => {
+      document.getElementById("progress-bar").setAttribute("value",25)
       e.preventDefault();
       let response = await fetch("/upload", {
         method: "POST",
         body: new FormData(e.target),
       });
+      document.getElementById("progress-bar").setAttribute("value",50)
 
       // result should be an array of images tagged based on an upload preset
       // used in the backend upload process
       let uploadedImage = await response.json();
-      debugger
+      document.getElementById("progress-bar").setAttribute("value",75)
+
+      // debugger
       insertNewImage(uploadedImage.url);
     });
 

@@ -37,14 +37,24 @@ const uploadImage = async (filename) => {
 const galleryImages = async (req, res) => {
   fetchOptimizedImageURLs()
     .then((urls) => {
-      console.log("first url", urls[0]);
+      // console.log("first url", urls[0]);
       res.json(urls);
     })
     .catch((error) => {
       console.log("galleryImages error", JSON.stringify(error));
     });
 };
-
+const getOptimizedURL = (publicId) => {
+  return cloudinary.url(publicId, {
+    width: 300,
+    height: 200,
+    crop: "fill",
+    gravity: "auto",
+    quality: "auto",
+    fetch_format: "auto",
+    secure: true,
+  });
+};
 const fetchOptimizedImageURLs = async () => {
   const response = await fetch(
     `https://res.cloudinary.com/picturecloud7/image/list/${process.env.LIST_TAG}.json`
@@ -53,17 +63,7 @@ const fetchOptimizedImageURLs = async () => {
 
   const optimizedImageURLs = [];
   for (let i = 0; i < data.resources.length; i++) {
-    optimizedImageURLs.push(
-      cloudinary.url(data.resources[i].public_id, {
-        width: 300,
-        height: 200,
-        crop: "fill",
-        gravity: "auto",
-        quality: "auto",
-        fetch_format: "auto",
-        secure: true,
-      })
-    );
+    optimizedImageURLs.push(getOptimizedURL(data.resources[i].public_id));
   }
   // console.log(JSON.stringify(optimizedImageURLs, null, 2));
   return optimizedImageURLs;
@@ -80,15 +80,7 @@ const upload = async (req, res) => {
     // when upload is successful we fetch a new list of images based on LIST_TAG env variable
     // we map out an array of URLs and return that to the front end to render
     // const urls = await fetchOptimizedImageURLs();
-    let newImageURL = cloudinary.url(uploadResponse.public_id, {
-      width: 300,
-      height: 200,
-      crop: "fill",
-      gravity: "auto",
-      quality: "auto",
-      fetch_format: "auto",
-      secure: true,
-    });
+    let newImageURL = getOptimizedURL(uploadResponse.public_id);
     console.log("new image", newImageURL);
     res.json({ url: newImageURL });
     // res.json(uploadResponse);

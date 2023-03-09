@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<htmllang="en">
 
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Cloudinary demo application for uploading images and displaying in gallery">
   <title>Cloudiary Upload Widget and Gallery</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +14,17 @@
 </head>
 
 <body>
+  <h1> Cloudinary File Upload and Optimize for Image Gallery</h1>
+
   <div class="container">
     <div class="form-container">
+     
       <form id="upload-form">
         <input class="input-with-text" type="file" id="file-input" name="file" accept="image/*" />
         <input class="input-with-text" type="submit" id="file-submit" value="Upload" disabled/> 
        </form>
+       <label>Uploading Image: <progress class="progress" id="progress-bar" value="0" max="100">70 %</progress></label>
+
     </div>
     <div id="gallery">
     </div>
