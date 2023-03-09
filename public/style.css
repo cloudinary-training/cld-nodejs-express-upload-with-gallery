@@ -4,17 +4,20 @@ body {
   font-weight: 300;
   font-size: 22px;
 }
+
 .input-with-text {
   font-family: 'Inter';
   font-weight: 300;
 
 }
+
 h1 {
   font-family: 'Inter';
   font-weight: 300;
   text-align: center;
   font-size: 2rem;
 }
+
 #gallery {
   display: flex;
   flex-direction: row;
@@ -22,17 +25,20 @@ h1 {
   column-gap: 5px;
   justify-content: center;
 }
+
 .container {
   animation: fadeInAnimation ease 3s;
   animation-iteration-count: 1;
   animation-fill-mode: forwards;
 }
+
 @keyframes fadeInAnimation {
   0% {
-      opacity: 0;
+    opacity: 0;
   }
+
   100% {
-      opacity: 1;
+    opacity: 1;
   }
 }
 
@@ -47,23 +53,29 @@ h1 {
   margin: 10px auto;
 }
 
- input[type=submit] {
+input[type=submit] {
   font-family: 'Inter';
   font-weight: 300;
   margin-right: 20px;
   border: none;
-  background: #3448c5;
+  background: #ff5050;
   padding: 10px 20px;
   border-radius: 10px;
-  color: #fff;
+  color: #000;
+  font-weight: bold;
   cursor: pointer;
- }
- input[type=submit]:disabled {
+
+}
+
+
+input[type=submit]:disabled {
   background-color: #eeeef1;
   color: #0c163b;
   opacity: 1;
   cursor: not-allowed;
+  animation: none;
 }
+
 input[type=file]::file-selector-button {
   margin-right: 20px;
   border: none;
@@ -78,6 +90,7 @@ input[type=file]::file-selector-button {
 input[type=file]::file-selector-button:hover {
   background: #0d45a5;
 }
+
 .progress::-webkit-progress-bar {
   background-color: #3448c5;
 }
